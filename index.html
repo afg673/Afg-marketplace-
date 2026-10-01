@@ -171,28 +171,6 @@
   .logout-btn.show { display: inline-block; }
   .logout-btn:hover { color: #ff5c88; border-color: #ff5c88; }
 
-  /* SEARCH BAR */
-  .search-wrap { max-width: 1200px; margin: 0 auto 18px; padding: 0 24px; display: flex; justify-content: center; }
-  .search-box { position: relative; width: 100%; max-width: 560px; }
-  .search-box input {
-    width: 100%; background: rgba(10,6,15,.9);
-    border: 1.5px solid #2b1f3d; color: #f2ede4;
-    padding: 14px 48px 14px 48px; border-radius: 999px;
-    font-size: 14px; font-family: inherit; outline: none; transition: all .25s;
-  }
-  .search-box input:focus { border-color: #b026ff; box-shadow: 0 0 28px rgba(176,38,255,.5); }
-  .search-box input::placeholder { color: #6b5f80; }
-  .search-box .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: #b026ff; font-size: 16px; pointer-events: none; }
-  .search-box .search-clear {
-    position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
-    width: 30px; height: 30px; border-radius: 50%;
-    background: rgba(176,38,255,.15); border: 1px solid #b026ff;
-    color: #d59bff; font-size: 14px; cursor: pointer;
-    font-family: inherit; display: none; place-items: center;
-  }
-  .search-box .search-clear.show { display: grid; }
-  .search-box .search-clear:hover { background: #b026ff; color: #fff; }
-
   /* NAV */
   .nav { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 34px; padding: 0 24px; }
   .nav button { background: rgba(10,6,15,.85); border: 1.5px solid #2b1f3d; color: #8a7fa0; padding: 10px 22px; border-radius: 999px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all .25s; }
@@ -252,9 +230,7 @@
 
   .info { padding: 18px; display: flex; flex-direction: column; flex: 1; }
   .info h3 { font-size: 15px; font-weight: 800; margin-bottom: 6px; color: #fff; line-height: 1.3; }
-  .info h3 mark { background: rgba(176,38,255,.35); color: #fff; padding: 0 2px; border-radius: 3px; }
   .info p { font-size: 12.5px; color: #8a7fa0; margin-bottom: 12px; flex: 1; line-height: 1.5; }
-  .info p mark { background: rgba(176,38,255,.35); color: #fff; padding: 0 2px; border-radius: 3px; }
   .price { font-size: 20px; font-weight: 900; color: #d59bff; margin-bottom: 10px; text-shadow: 0 0 12px rgba(176,38,255,.6); }
   .posted-line { font-size: 10.5px; color: #6b5f80; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
   .posted-line.fresh { color: #00d4ff; text-shadow: 0 0 8px rgba(0,212,255,.6); }
@@ -405,9 +381,6 @@
 
   .chat-layout { flex: 1; display: grid; grid-template-columns: 340px 1fr; overflow: hidden; min-height: 0; }
   .chat-sidebar { border-right: 1.5px solid #2b1f3d; display: flex; flex-direction: column; overflow: hidden; background: rgba(10,6,15,.4); }
-  .chat-sidebar-search { padding: 14px 18px; border-bottom: 1px solid #2b1f3d; }
-  .chat-sidebar-search input { width: 100%; background: rgba(10,6,15,.9); border: 1.5px solid #2b1f3d; color: #f2ede4; padding: 10px 14px; border-radius: 10px; font-size: 13px; font-family: inherit; outline: none; }
-  .chat-sidebar-search input:focus { border-color: #b026ff; }
   .chat-tabs { display: flex; gap: 6px; padding: 12px 14px; overflow-x: auto; border-bottom: 1px solid #2b1f3d; }
   .chat-tabs::-webkit-scrollbar { height: 0; }
   .chat-tab { background: rgba(10,6,15,.9); border: 1px solid #2b1f3d; color: #8a7fa0; padding: 7px 14px; border-radius: 999px; font-size: 11.5px; font-weight: 800; cursor: pointer; font-family: inherit; white-space: nowrap; }
@@ -538,7 +511,6 @@
     .field-row { grid-template-columns: 1fr; }
     .chat-modal { height: 95vh; border-radius: 0; max-height: none; }
     #fabAdd { width: 56px; height: 56px; font-size: 30px; bottom: 20px; right: 20px; }
-    .search-box input { padding: 12px 42px 12px 42px; font-size: 13px; }
   }
   @media (max-width: 430px) {
     .grid { grid-template-columns: 1fr; }
@@ -593,15 +565,6 @@
       <span class="admin-tag" id="adminTag" style="display:none;">ADMIN</span>
     </div>
     <button class="logout-btn" id="logoutBtn">Log out</button>
-  </div>
-</div>
-
-<!-- SEARCH BAR -->
-<div class="search-wrap">
-  <div class="search-box">
-    <span class="search-icon">🔍</span>
-    <input type="text" id="searchInput" placeholder="Search items by name, description, or category..." autocomplete="off" />
-    <button class="search-clear" id="searchClear" title="Clear search">×</button>
   </div>
 </div>
 
@@ -766,9 +729,6 @@
     </div>
     <div class="chat-layout show-list" id="chatLayout">
       <div class="chat-sidebar">
-        <div class="chat-sidebar-search">
-          <input type="text" id="chatSearch" placeholder="Search conversations..." />
-        </div>
         <div class="chat-tabs" id="chatTabs">
           <button class="chat-tab active" data-filter="all">All</button>
           <button class="chat-tab" data-filter="open">Open</button>
@@ -824,7 +784,6 @@ const NEW_HOURS = 24;
 (function(){
   const blockScreen = document.getElementById('blockScreen');
 
-  // Is the login/signup modal currently open?
   function isAuthOpen(){
     const a = document.getElementById('authModal');
     return a && a.classList.contains('open');
@@ -832,7 +791,7 @@ const NEW_HOURS = 24;
 
   let blocked = false;
   function showBlock(){
-    if(isAuthOpen()) return;      // never block on login/signup
+    if(isAuthOpen()) return;
     if(blocked) return;
     blocked = true;
     blockScreen.classList.add('show');
@@ -845,23 +804,19 @@ const NEW_HOURS = 24;
     document.body.style.overflow = '';
   }
 
-  // Right-click: allowed while logging in, blocked elsewhere
   document.addEventListener('contextmenu', e => {
     if(isAuthOpen()) return;
     e.preventDefault();
     return false;
   });
 
-  // Copy: allowed while logging in and inside inputs
   document.addEventListener('copy', e => {
     if(isAuthOpen()) return;
     if(!e.target.closest('input, textarea')) e.preventDefault();
   });
 
-  // Keyboard: fully allowed while logging in
   document.addEventListener('keydown', e => {
     if(isAuthOpen()) return;
-
     const k = e.key || '';
     const ctrl = e.ctrlKey || e.metaKey;
     if(k === 'F12'){ e.preventDefault(); showBlock(); return false; }
@@ -870,7 +825,6 @@ const NEW_HOURS = 24;
     if(ctrl && /^(A|a)$/.test(k) && !e.target.closest('input, textarea')){ e.preventDefault(); return false; }
   }, true);
 
-  // DevTools detection: skipped while logging in
   let devtoolsOpen = false;
   setInterval(() => {
     if(isAuthOpen()){
@@ -884,13 +838,11 @@ const NEW_HOURS = 24;
     else if(!isOpen && devtoolsOpen){ devtoolsOpen = false; hideBlock(); }
   }, 800);
 
-  // Drag protection: allowed while logging in
   document.addEventListener('dragstart', e => {
     if(isAuthOpen()) return;
     if(!e.target.closest('input, textarea, .img-upload-box')) e.preventDefault();
   });
 
-  // Auto-hide blocker when the auth modal opens
   const authModalEl = document.getElementById('authModal');
   if(authModalEl){
     new MutationObserver(() => {
@@ -988,12 +940,12 @@ function animateCursor() {
 if (window.innerWidth > 900) animateCursor();
 
 document.addEventListener('mouseover', e => {
-  if (e.target.closest('button, a, .card, .neon-chip, .neon-size, .chat-list-item, .ask-btn, .offer-btn, .conv-action-btn, .chat-tab, input, textarea, select, .size-checks label, #newItemBanner, .search-clear')) {
+  if (e.target.closest('button, a, .card, .neon-chip, .neon-size, .chat-list-item, .ask-btn, .offer-btn, .conv-action-btn, .chat-tab, input, textarea, select, .size-checks label, #newItemBanner')) {
     if (cursorRing) cursorRing.classList.add('grow');
   }
 });
 document.addEventListener('mouseout', e => {
-  if (e.target.closest('button, a, .card, .neon-chip, .neon-size, .chat-list-item, .ask-btn, .offer-btn, .conv-action-btn, .chat-tab, input, textarea, select, .size-checks label, #newItemBanner, .search-clear')) {
+  if (e.target.closest('button, a, .card, .neon-chip, .neon-size, .chat-list-item, .ask-btn, .offer-btn, .conv-action-btn, .chat-tab, input, textarea, select, .size-checks label, #newItemBanner')) {
     if (cursorRing) cursorRing.classList.remove('grow');
   }
 });
@@ -1127,8 +1079,7 @@ function applySession(){
 /* ========== PRODUCTS ========== */
 let PRODUCTS = [];
 let editingId = null;
-let currentImages = [];
-let searchTerm = '';
+let currentImages = '';
 
 const colorways=["sand","dark","teal","gold","white"];
 function palette(cw){const P={sand:{bg:"#1a1712",body:"#e8dcc8",shade:"#cfc0a5",ink:"#1a1712"},dark:{bg:"#141210",body:"#232019",shade:"#191712",ink:"#d4a24c"},teal:{bg:"#12100d",body:"#2f8f83",shade:"#25736a",ink:"#f2ede4"},gold:{bg:"#141210",body:"#d4a24c",shade:"#b9862f",ink:"#1a1509"},white:{bg:"#141210",body:"#f4f1ea",shade:"#ddd7cb",ink:"#2a251d"}};return P[cw]||P.sand;}
@@ -1164,37 +1115,16 @@ const grid=document.getElementById('grid'), nav=document.getElementById('nav');
 let activeCat="All";
 
 function filterList(cat){
-  let list = cat==="All" ? PRODUCTS : PRODUCTS.filter(p=>p.cat===cat);
-  if(searchTerm){
-    const q = searchTerm.toLowerCase();
-    list = list.filter(p => {
-      const name = (p.name || '').toLowerCase();
-      const desc = (p.desc || '').toLowerCase();
-      const cat2 = (p.cat || '').toLowerCase();
-      const cond = (p.condition || '').toLowerCase();
-      const sizes = (productSizes(p).join(' ')).toLowerCase();
-      return name.includes(q) || desc.includes(q) || cat2.includes(q) || cond.includes(q) || sizes.includes(q);
-    });
-  }
-  return list;
-}
-
-function highlight(text, query){
-  if(!query) return escapeHtml(text);
-  const safe = escapeHtml(text);
-  const q = query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
-  const re = new RegExp('(' + q + ')', 'gi');
-  return safe.replace(re, '<mark>$1</mark>');
+  return cat==="All" ? PRODUCTS : PRODUCTS.filter(p=>p.cat===cat);
 }
 
 function renderProducts(){
   const list=filterList(activeCat);
   if(!list.length){
-    const isSearching = !!searchTerm;
     grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:80px 20px;color:#8a7fa0;">
-      <div style="font-size:56px;opacity:.3;margin-bottom:14px;">${isSearching ? '🔍' : '🛍️'}</div>
-      <b style="color:#d59bff;font-size:18px;display:block;margin-bottom:6px;">${isSearching ? 'No items match your search' : 'No items yet'}</b>
-      <p style="font-size:14px;">${isSearching ? 'Try a different keyword or clear the search.' : 'Check back soon!'}</p>
+      <div style="font-size:56px;opacity:.3;margin-bottom:14px;">🛍️</div>
+      <b style="color:#d59bff;font-size:18px;display:block;margin-bottom:6px;">No items yet</b>
+      <p style="font-size:14px;">Check back soon!</p>
     </div>`;
     return;
   }
@@ -1236,8 +1166,8 @@ function renderProducts(){
       </div>
       <div class="thumb ${multi?'has-multi':''}" data-thumb="${p.id}">${thumb}${dots}${count}</div>
       <div class="info">
-        <h3>${highlight(p.name, searchTerm)}</h3>
-        <p>${highlight(p.desc, searchTerm)}</p>
+        <h3>${escapeHtml(p.name)}</h3>
+        <p>${escapeHtml(p.desc)}</p>
         <div class="price">$${Number(p.price).toFixed(2)}</div>
         ${postedLine}
         ${sizeHtml}
@@ -1286,23 +1216,6 @@ nav.addEventListener('click',e=>{
   e.target.classList.add('active');
   activeCat=e.target.dataset.cat;
   renderProducts();
-});
-
-/* ========== SEARCH BAR ========== */
-const searchInput = document.getElementById('searchInput');
-const searchClear = document.getElementById('searchClear');
-let searchDebounce;
-searchInput.addEventListener('input', e => {
-  searchTerm = e.target.value.trim();
-  searchClear.classList.toggle('show', !!searchTerm);
-  clearTimeout(searchDebounce);
-  searchDebounce = setTimeout(renderProducts, 120);
-});
-searchInput.addEventListener('keydown', e => {
-  if(e.key === 'Escape'){ searchInput.value=''; searchTerm=''; searchClear.classList.remove('show'); renderProducts(); }
-});
-searchClear.addEventListener('click', () => {
-  searchInput.value=''; searchTerm=''; searchClear.classList.remove('show'); renderProducts(); searchInput.focus();
 });
 
 function adminGuard(){
@@ -1592,10 +1505,7 @@ async function createMessage(type, product, size, message, offerAmount){
   };
 
   await firebaseSaveMessage(item);
-
-  // ✉️ Send email to shop owner
   sendMessageEmail(item);
-
   showSuccess(type, item);
 }
 
@@ -1668,12 +1578,10 @@ function sendMessageEmail(item){
 const chatModal = document.getElementById('chatModal');
 const chatList = document.getElementById('chatList');
 const chatMain = document.getElementById('chatMain');
-const chatSearch = document.getElementById('chatSearch');
 const chatLayoutEl = document.getElementById('chatLayout');
 const chatModeSwitch = document.getElementById('chatModeSwitch');
 let activeFilter = 'all';
 let activeChatId = null;
-let searchQuery = '';
 let chatViewMode = 'user';
 
 function myChats(){
@@ -1721,9 +1629,7 @@ function openChat(mode){
     chatViewMode = 'user';
   }
   activeFilter = 'all';
-  searchQuery = '';
   activeChatId = null;
-  chatSearch.value = '';
   chatLayoutEl.classList.add('show-list');
   chatLayoutEl.classList.remove('mobile-conv-open');
   document.querySelectorAll('#chatTabs .chat-tab').forEach(t => t.classList.toggle('active', t.dataset.filter === 'all'));
@@ -1761,7 +1667,6 @@ document.getElementById('chatTabs').addEventListener('click', e => {
   activeFilter = e.target.dataset.filter;
   renderChatList();
 });
-chatSearch.addEventListener('input', e => { searchQuery = e.target.value.trim().toLowerCase(); renderChatList(); });
 
 function renderChatList(){
   let list = myChats();
@@ -1771,14 +1676,6 @@ function renderChatList(){
     } else {
       list = list.filter(m => (m.status || 'open') === activeFilter);
     }
-  }
-  if(searchQuery){
-    list = list.filter(m => {
-      const name = (m.userName || '').toLowerCase();
-      const product = (m.product.name || '').toLowerCase();
-      const msgText = (m.message || '').toLowerCase();
-      return name.includes(searchQuery) || product.includes(searchQuery) || msgText.includes(searchQuery);
-    });
   }
   document.getElementById('chatCount').textContent = list.length;
   if(!list.length){
